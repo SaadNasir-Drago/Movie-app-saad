@@ -2,7 +2,7 @@ import {
   getUserCookie,
   removeUserCookie,
   setUserCookie,
-} from "@/services/cookie";
+} from "@/utils/cookie";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface UserState {

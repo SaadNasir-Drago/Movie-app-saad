@@ -1,8 +1,8 @@
 "use client";
 
-import LoaderSpinner from "@/components/LoaderSpinner";
+import LoaderSpinner from "@/utils/LoaderSpinner";
 import ConfirmModal from "@/components/modal";
-import timeAgo from "@/services/date";
+import timeAgo from "@/utils/date";
 import { AppDispatch, RootState } from "@/store/store";
 import {
   fetchWatchlist,
@@ -57,10 +57,6 @@ export default function WatchlistPage() {
   const goToDetails = (id: any) => {
     router.push(`/movies/${id}`);
   };
-
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
 
   return (
     <div>

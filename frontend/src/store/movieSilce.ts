@@ -40,7 +40,7 @@ const initialState: MovieState = {
   searchQuery: "",
   error: null,
 };
-
+//refactor: two functions with similar functionality needs to be unified
 export const fetchMovies = createAsyncThunk(
   "movies/fetchMovies",
   async ({ page, limit, filters }: FetchMoviesParams) => {
@@ -58,7 +58,7 @@ export const fetchInitialMovies = createAsyncThunk(
     return { movies, hasMore: movies.length === limit };
   }
 );
-
+//
 const movieSlice = createSlice({
   name: "movies",
   initialState,
@@ -72,6 +72,10 @@ const movieSlice = createSlice({
       state.page = 1;
       state.movies = [];
       state.hasMore = true;
+    },
+    setMovies: (state, action: PayloadAction<{ movies: Movie[]; hasMore: boolean }>) => {
+      state.movies = action.payload.movies;
+      state.hasMore = action.payload.hasMore;
     },
   },
   extraReducers: (builder) => {

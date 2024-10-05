@@ -17,6 +17,7 @@ interface DiscoveryHeaderProps {
     certificate?: string;
   }) => void;
 }
+
 const DiscoveryHeader: React.FC<DiscoveryHeaderProps> = ({
   genre,
   ratings,
@@ -24,48 +25,20 @@ const DiscoveryHeader: React.FC<DiscoveryHeaderProps> = ({
   certificate,
   onFilterChange,
 }) => {
-  const [selectedGenre, setSelectedGenre] = useState<string>("");
-  const [selectedRating, setSelectedRating] = useState<string>("");
-  const [selectedType, setSelectedType] = useState<string>("");
-  const [selectedCertificate, setSelectedCertificate] = useState<string>("");
+  const [filters, setFilters] = useState({
+    genre: "",
+    rating: "",
+    type: "",
+    certificate: "",
+  });
 
-  const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedGenre(e.target.value);
-    onFilterChange({
-      genre: e.target.value,
-      rating: selectedRating,
-      type: selectedType,
-      certificate: selectedCertificate,
-    });
-  };
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>, filterType: string) => {
+    const value = e.target.value;
 
-  const handleRatingChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedRating(e.target.value);
-    onFilterChange({
-      genre: selectedGenre,
-      rating: e.target.value,
-      type: selectedType,
-      certificate: selectedCertificate,
-    });
-  };
-
-  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedType(e.target.value);
-    onFilterChange({
-      genre: selectedGenre,
-      rating: selectedRating,
-      type: e.target.value,
-      certificate: selectedCertificate,
-    });
-  };
-
-  const handleCertificateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCertificate(e.target.value);
-    onFilterChange({
-      genre: selectedGenre,
-      rating: selectedRating,
-      type: selectedType,
-      certificate: e.target.value,
+    setFilters((prevFilters) => {
+      const updatedFilters = { ...prevFilters, [filterType]: value };
+      onFilterChange(updatedFilters);
+      return updatedFilters;
     });
   };
 
@@ -74,11 +47,10 @@ const DiscoveryHeader: React.FC<DiscoveryHeaderProps> = ({
       <div className="flex flex-col md:flex-row items-center justify-between">
         {/* Genre Filter */}
         <select
-          // className="border border-gray-300 rounded-md p-2 mb-4 md:mb-0 md:mr-4 w-full md:w-1/4"
           className={`w-full max-w-[250px] h-12 text-sm font-light tracking-wide text-center uppercase align-middle rounded-full px-3
             border cursor-pointer bg-gray-500 border-black hover:bg-gray-600 text-white overflow-auto custom-scrollbar`}
-          value={selectedGenre}
-          onChange={handleGenreChange}
+          value={filters.genre}
+          onChange={(e) => handleChange(e, "genre")}
         >
           <option value="">Select Genre</option>
           {genre.map((genre) => (
@@ -90,11 +62,10 @@ const DiscoveryHeader: React.FC<DiscoveryHeaderProps> = ({
 
         {/* Rating Filter */}
         <select
-          // className="border border-gray-300 rounded-md p-2 w-full md:w-1/4"
           className={`w-full max-w-[250px] h-12 text-sm font-light tracking-wide text-center uppercase align-middle rounded-full px-3
             border cursor-pointer bg-gray-500 border-black hover:bg-gray-600 text-white overflow-auto custom-scrollbar`}
-          value={selectedRating}
-          onChange={handleRatingChange}
+          value={filters.rating}
+          onChange={(e) => handleChange(e, "rating")}
         >
           <option value="">Select Rating</option>
           {ratings.map((rating) => (
@@ -104,13 +75,12 @@ const DiscoveryHeader: React.FC<DiscoveryHeaderProps> = ({
           ))}
         </select>
 
-        {/* Rating Filter */}
+        {/* Type Filter */}
         <select
-          // className="border border-gray-300 rounded-md p-2 w-full md:w-1/4"
           className={`w-full max-w-[250px] h-12 text-sm font-light tracking-wide text-center uppercase align-middle rounded-full px-3
             border cursor-pointer bg-gray-500 border-black hover:bg-gray-600 text-white overflow-auto custom-scrollbar`}
-          value={selectedType}
-          onChange={handleTypeChange}
+          value={filters.type}
+          onChange={(e) => handleChange(e, "type")}
         >
           <option value="">Select Type</option>
           {type.map((t) => (
@@ -122,11 +92,10 @@ const DiscoveryHeader: React.FC<DiscoveryHeaderProps> = ({
 
         {/* Certificate Filter */}
         <select
-          // className="border border-gray-300 rounded-md p-2 w-full md:w-1/4"
           className={`w-full max-w-[250px] h-12 text-sm font-light tracking-wide text-center uppercase align-middle rounded-full px-3
             border cursor-pointer bg-gray-500 border-black hover:bg-gray-600 text-white overflow-auto custom-scrollbar`}
-          value={selectedCertificate}
-          onChange={handleCertificateChange}
+          value={filters.certificate}
+          onChange={(e) => handleChange(e, "certificate")}
         >
           <option value="">Select Certificate</option>
           {certificate.map((c) => (

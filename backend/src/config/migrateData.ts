@@ -1,23 +1,4 @@
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 import { faker } from "@faker-js/faker";
 import sequelize, { Genre, Movie, MovieGenre } from "./database";
@@ -30,7 +11,7 @@ const insertFakeMoviesInChunks = async (chunkSize: number) => {
     // Fetch all genres from the database
     const genres = await Genre.findAll();
 
-    for (let i = 0; i < 100000; i += chunkSize) {
+    for (let i = 0; i < 10000; i += chunkSize) {
       const moviesData = [];
       const movieGenreData = [];
 
@@ -108,7 +89,7 @@ const insertFakeMoviesInChunks = async (chunkSize: number) => {
 };
 
 // // Call the function to start inserting data in chunks of 10,000
-// insertFakeMoviesInChunks(10000);
+insertFakeMoviesInChunks(1000);
 //
 //
 //

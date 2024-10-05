@@ -27,11 +27,9 @@ export const getAllMovies = async (
       ),
     });
 
-    //console.log(`Fetching movies with params: ${params}`);
     const response = await api.get(`/movies?${params.toString()}`);
 
-    // Assuming the API returns the movies in `response.data.movies`
-    // console.log(`Fetching movies with params: ${JSON.stringify(response.data.movies)}`);
+    
     return response.data.movies;
   } catch (error) {
     console.error("Error fetching movies", error);
@@ -42,7 +40,6 @@ export const getAllMovies = async (
 export const getMovieDetails = async (id: number) => {
   try {
     const response = await api.get(`/movie/${id}`);
-    // console.log(`getmoviedetails ${JSON.stringify(response)}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching movie details", error);
@@ -67,7 +64,7 @@ export const postReview = async (
     }
     const response = await api.post(`/${movieID}/review`, payload, {
       headers: {
-        Authorization: `Bearer ${token}`, // Send token in Authorization header
+        Authorization: `Bearer ${token}`, 
       },
     });
     return response.data;
@@ -87,7 +84,7 @@ export const deleteReview = async (
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      data: { reviewID }, // Pass the reviewID in the request body
+      data: { reviewID }, 
     });
     return response.data;
   } catch (error) {
@@ -150,7 +147,6 @@ export const getUserMovies = async (token: string | null) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    // console.log(`user movies: ${JSON.stringify(response.data)}}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching user movies", error);

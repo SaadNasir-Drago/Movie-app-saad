@@ -1,7 +1,6 @@
 "use client";
 
-import { genreOptions } from "@/components/filter";
-import LoaderSpinner from "@/components/LoaderSpinner";
+import { genreOptions } from "@/utils/filter";
 import ConfirmModal from "@/components/modal";
 import {
   createMovie,
@@ -67,7 +66,6 @@ export default function CreateMovie() {
   } = useForm<MovieForm>();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
   const [editingMovieID, setEditingMovieID] = useState<number | null>(null);
   const isFetching = useRef(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -107,7 +105,7 @@ export default function CreateMovie() {
       } catch (error) {
         toast.error("Error fetching user movies");
       } finally {
-        setLoading(false);
+        // setLoading(false);
         isFetching.current = false;
       }
     }
@@ -168,7 +166,7 @@ export default function CreateMovie() {
       setImagePreview(null); // Clear image preview
     } catch (error: any) {
       console.log(error);
-      toast.error("asdfsdf");
+      toast.error("Error", error);
     }
   };
 

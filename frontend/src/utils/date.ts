@@ -23,7 +23,4 @@ export default function timeAgo(isoString: string): string {
   return "Just now";
 }
 
-// Example usage:
 const isoDateString = "2024-09-21T10:41:06.650Z";
-// console.log(timeAgo(isoDateString));
-// Output will vary based on current time, e.g., "2 hours ago"

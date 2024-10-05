@@ -8,9 +8,11 @@ import ReviewModel from "../models/Review";
 import WatchListModel from "../models/WatchList";
 import UserMovieModel from "../models/UserMovie";
 
-const sequelize = new Sequelize("moviewebapp", "mysqlclient", "admin", {
+const sequelize = new Sequelize("moviewebapp", "postgres", "root", {
   host: "localhost",
   dialect: "postgres",
+  // Disable automatic syncing
+  // synchronize: false,
 });
 
 const User = UserModel(sequelize);

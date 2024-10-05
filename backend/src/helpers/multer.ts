@@ -28,7 +28,6 @@ export const upload = multer({
     if (file.mimetype.startsWith("image/")) {
       cb(null, true);
     } else {
-      //cb(new Error("Please upload only images"), false);
     }
   },
-}).single("thumbnail"); // Expect a single image file
+}).single("thumbnail"); 

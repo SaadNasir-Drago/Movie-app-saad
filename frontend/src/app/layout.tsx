@@ -4,10 +4,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/base/header";
 import Footer from "@/components/base/footer";
-import Container from "@/components/base/container";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
-// import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,11 +25,9 @@ export default function RootLayout({
         <body
           className={`${inter.className} bg-primary text-zinc-900 min-h-screen custom-scrollbar`}
         >
-          <Container>
-            <Header />
-            {children}
-            <Footer />
-          </Container>
+          <Header />
+          {children}
+          <Footer />
         </body>
       </html>
     </Provider>
